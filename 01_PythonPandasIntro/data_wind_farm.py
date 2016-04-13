@@ -18,8 +18,8 @@ plt.rcParams.update({'font.size': 18})
 
 
 # configuration (for windows e. g. "C:\\IESMO\\data_wind_farm\\")
-directory_path = ("/home/cord/Programmierung/IESMO/"
-                  "Pandas_Example/data_wind_farm/")
+directory_path = ("/home/cord/ownCloud/Lehre/iesmo_SS2016/code/iesmo_SS2016/"
+                  "01_PythonPandasIntro/data_wind_farm/")
 
 # %% dataframe creation
 
