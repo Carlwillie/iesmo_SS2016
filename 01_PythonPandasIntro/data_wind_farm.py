@@ -16,8 +16,8 @@ plt.rcParams['text.color'] = 'k'
 plt.rcParams['axes.labelcolor'] = 'k'
 plt.rcParams.update({'font.size': 18})
 
-# configuration
-# for windows this looks like ("C:\\IESMO\\data_wind_farm\\")
+
+# configuration (for windows e. g. "C:\\IESMO\\data_wind_farm\\")
 directory_path = ("/home/cord/Programmierung/IESMO/"
                   "Pandas_Example/data_wind_farm/")
 
