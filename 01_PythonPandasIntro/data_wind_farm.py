@@ -161,6 +161,10 @@ stormy_hours.shape
 
 # %% basic plotting
 
+# plot of statistical params for 10 min wind speed values
+box = df_wind_wide.plot(kind='box', legend=True, showmeans=True, rot=0)
+box.set_title('Wind speed in m/s')
+
 # wind speed distribution (30 min mean) in Ellhöft in 2004
 mean_wind_speed_30min = df[['Wind']].resample('30Min', how='mean')
 mean_wind_speed_30min.head()
@@ -179,7 +183,7 @@ line[0].set_title('Wind speed in m/s')
 line[5].set_xlabel('Date and time')
 [item.legend(loc='upper right', fontsize=14) for item in line]
 
-# basic plotting: annual production over time
+# annual production over time
 # at first, the mean values per hour are calculated. afterwards, these are
 # summed up on an annual basis
 df_power_wide = df[['Wea', 'Leistung']]
@@ -226,7 +230,14 @@ def kw_in_mw(x):
 
 str(kw_in_mw)
 
+# call on column
 df['Leistung_in_MW'] = df['Leistung'].apply(kw_in_mw)
+df[['Leistung', 'Leistung_in_MW']].head()
+
+# these options are also valid if the functions are not too complex
+df['Leistung_in_MW'] = df['Leistung'].divide(1000)
+df[['Leistung', 'Leistung_in_MW']].head()
+df['Leistung_in_MW'] = df['Leistung'].multiply(10**-3)
 df[['Leistung', 'Leistung_in_MW']].head()
 
 # EXCERCISE 4 (20 minutes):
