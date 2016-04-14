@@ -62,7 +62,7 @@ finally:
 # show size, index, column names, data types, ...
 df.info()
 
-# have a look at the first/last rows (compare with Spyder's variable browser)
+# have a look at the first/last rows (compare with spyder's variable browser)
 df.head()
 df.tail()
 
@@ -165,7 +165,7 @@ stormy_hours.shape
 box = df_wind_wide.plot(kind='box', legend=True, showmeans=True, rot=0)
 box.set_title('Wind speed in m/s')
 
-# wind speed distribution (30 min mean) in Ellhöft in 2004
+# wind speed distribution (30 min mean) in ellhöft in 2004
 mean_wind_speed_30min = df[['Wind']].resample('30Min', how='mean')
 mean_wind_speed_30min.head()
 mean_wind_speed_30min['2004'].shape
