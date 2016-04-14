@@ -154,6 +154,29 @@ stormy_hours = max_wind_speed_hourly[(max_wind_speed_hourly >= 21)]
 stormy_hours.head()
 stormy_hours.shape
 
+# now we only want the windy hours (6-8 Beaufort) and use a boolean operator
+windy_hours = max_wind_speed_hourly[(max_wind_speed_hourly >= 11) &
+                                    (max_wind_speed_hourly <= 20)]
+windy_hours.head()
+
+# and the unwindy hours (inverse of windy hours)
+unwindy_hours = max_wind_speed_hourly[~((max_wind_speed_hourly >= 11) &
+                                       (max_wind_speed_hourly <= 20))]
+unwindy_hours.head()
+unwindy_hours.max()
+
+# check if the ~ operator works as expected
+# is the order of the index and values relevant for the .equals() method?
+max_wind_speed_hourly_merged = pd.concat([windy_hours, unwindy_hours])
+max_wind_speed_hourly.equals(max_wind_speed_hourly_merged)
+max_wind_speed_hourly_merged.head()
+max_wind_speed_hourly_merged.tail()
+max_wind_speed_hourly_merged.sort_index(inplace=True)
+max_wind_speed_hourly.equals(max_wind_speed_hourly_merged)
+
+# some neat pandas idioms for common tasks can be found here:
+# http://pandas.pydata.org/pandas-docs/stable/cookbook.html
+
 # EXCERCISE 2 (15 minutes):
 #
 # determine the number of days between 2001 and 2007 where at least one turbine
