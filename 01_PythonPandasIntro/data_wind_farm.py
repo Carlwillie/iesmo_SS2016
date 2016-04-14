@@ -234,7 +234,7 @@ str(kw_in_mw)
 df['Leistung_in_MW'] = df['Leistung'].apply(kw_in_mw)
 df[['Leistung', 'Leistung_in_MW']].head()
 
-# these options are also valid if the functions are not too complex
+# if operations are not too complex, these methods can be used likewise
 df['Leistung_in_MW'] = df['Leistung'].divide(1000)
 df[['Leistung', 'Leistung_in_MW']].head()
 df['Leistung_in_MW'] = df['Leistung'].multiply(10**-3)
@@ -244,7 +244,7 @@ df[['Leistung', 'Leistung_in_MW']].head()
 #
 # calculate the power contained in the wind at each turbine and append the
 # result as a new column. afterwards, look at the values for the first twenty
-# day of april 2007 and find the turbine with the lowest value by applying
+# days of april 2007 and find the turbine with the lowest value by applying
 # a suitable dataframe method
 #
 # P_contained = 1/2 * roh_air * A * v_wind^3
