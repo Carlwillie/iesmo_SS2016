@@ -16,7 +16,6 @@ plt.rcParams['text.color'] = 'k'
 plt.rcParams['axes.labelcolor'] = 'k'
 plt.rcParams.update({'font.size': 18})
 
-
 # configuration (for windows e. g. "C:\\IESMO\\data_wind_farm\\")
 directory_path = ("/home/cord/ownCloud/Lehre/iesmo_SS2016/code/iesmo_SS2016/"
                   "01_PythonPandasIntro/data_wind_farm/")
@@ -165,7 +164,7 @@ df['Wind'].unique()
 
 # create hourly wind speed series (note that the data type is a series (1D))
 # what happened to the different turbines?
-max_wind_speed_hourly = df['Wind'].resample('1H', how='max')
+max_wind_speed_hourly = df['Wind'].resample('1H').max()
 max_wind_speed_hourly.head()
 max_wind_speed_hourly.shape
 
@@ -180,7 +179,7 @@ windy_hours = max_wind_speed_hourly[(max_wind_speed_hourly >= 11) &
                                     (max_wind_speed_hourly <= 20)]
 windy_hours.head()
 
-# and the unwindy hours (inverse of windy hours)
+# and the unwindy hours (inverse of windy hours including stormy hours)
 unwindy_hours = max_wind_speed_hourly[~((max_wind_speed_hourly >= 11) &
                                        (max_wind_speed_hourly <= 20))]
 unwindy_hours.head()
@@ -210,7 +209,7 @@ box = df_wind_wide.plot(kind='box', legend=True, showmeans=True, rot=0)
 box.set_title('Wind speed in m/s')
 
 # wind speed distribution (30 min mean) in ellhöft in 2004
-mean_wind_speed_30min = df[['Wind']].resample('30Min', how='mean')
+mean_wind_speed_30min = df[['Wind']].resample('30Min').mean()
 mean_wind_speed_30min.head()
 mean_wind_speed_30min['2004'].shape
 hist = mean_wind_speed_30min['2004'].plot.hist(color='blue', bins=50,
@@ -220,7 +219,7 @@ hist.set_xlabel('Wind speed in m/s')
 hist.set_ylabel('Frequency')
 
 # wind speed (hourly mean) over time in 2004
-df_wind_2004_hourly_mean = df_wind_wide['2004'].resample('H', how='mean')
+df_wind_2004_hourly_mean = df_wind_wide['2004'].resample('H').mean()
 line = df_wind_2004_hourly_mean.plot(kind='line', drawstyle='steps',
                                      subplots=True)
 line[0].set_title('Wind speed in m/s')
@@ -241,8 +240,8 @@ df_power_wide = df_power_wide.pivot(index=None, columns='Wea',
                                     values='Leistung')
 df_power_wide.head()
 
-df_prod_annual = df_power_wide.resample('1H', how='mean')
-df_prod_annual = df_prod_annual.resample('1A', how='sum')
+df_prod_annual = df_power_wide.resample('1H').mean()
+df_prod_annual = df_prod_annual.resample('1A').sum()
 df_prod_annual.index = df_prod_annual.index.year
 df_prod_annual = df_prod_annual.divide(10**3)
 bar = df_prod_annual.transpose().plot(kind='bar', legend=True, rot=0)
